@@ -3,6 +3,8 @@ import {Input} from "../../reusable-components/input/input.tsx";
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from 'react-router-dom';
+import {FlowLayout} from "../../reusable-components/flow-layout/flow-layout.tsx";
+import {Button} from "../../reusable-components/button/button.tsx";
 
 
 const Container = styled.div`
@@ -15,16 +17,8 @@ const Container = styled.div`
 const CardHeader = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 15px
-`;
-
-const StyledButton = styled.button`
-    width: 100%;
-    background: hsla(244,49%,49%,1);
-    color: white;
-    padding: 10px 0;
-    border-radius: 10px;
-    margin-top: 30px;
+    gap: 15px;
+    margin-bottom: 20px;
 `;
 
 const ErrorText= styled.li`
@@ -84,24 +78,26 @@ export const CreateAccount = () => {
 
     return (
         <Container>
-            <Card title="Create New Account">
-                <CardHeader>
-                    <Input label="Username" onChange={setUsername}/>
-                    <Input label="Password" onChange={setPassword}/>
-                    {errors.length > 0 && (
-                        <div>
-                            <ul>
-                                {errors.map((error, index) => (
-                                    <ErrorText key={index}>{error}</ErrorText>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
-                </CardHeader>
-                <StyledButton onClick={handleClick}>
+            <FlowLayout>
+                <Card title="Create New Account">
+                    <CardHeader>
+                        <Input label="Username" onChange={setUsername}/>
+                        <Input label="Password" onChange={setPassword}/>
+                        {errors.length > 0 && (
+                            <div>
+                                <ul>
+                                    {errors.map((error, index) => (
+                                        <ErrorText key={index}>{error}</ErrorText>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+                    </CardHeader>
+                    <Button onClick={handleClick}>
                         Create Account
-                </StyledButton>
-            </Card>
+                    </Button>
+                </Card>
+            </FlowLayout>
         </Container>
     )
 }

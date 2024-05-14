@@ -1,13 +1,34 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { FlowLayout } from '../../reusable-components/flow-layout/flow-layout.tsx';
+import {Button} from "../../reusable-components/button/button.tsx";
+import styled from "styled-components";
+import {Card} from "../../reusable-components/card/card.tsx";
+
+const Container = styled.div`
+    display: flex;
+    justify-self: center;
+    align-self: center;
+`;
+
+const Body = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 15px;
+`
 
 export function Root() {
   return (
-    <FlowLayout>
-      <Link to="/signup/account-selection" className="text-xl flex justify-self-start mt-7">
-        Get started
-      </Link>
-    </FlowLayout>
+      <Container>
+          <Card title="Welcome To Wealthfront">
+              <Body>
+                  <Button href="/signup/account-selection" >
+                      Select a new account
+                  </Button>
+                  <Button href="/create-account">
+                      Create a new account
+                  </Button>
+              </Body>
+          </Card>
+      </Container>
   );
 }
