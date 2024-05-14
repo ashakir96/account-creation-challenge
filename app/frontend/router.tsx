@@ -42,7 +42,7 @@ const router = createBrowserRouter([
 export function Router() {
   return (
     <main className="h-screen w-screen">
-      <div className="h-full w-full max-w-[1200px] my-0 mx-auto">
+      <div className="h-full w-full max-w-[1200px] my-0 mx-auto flex items-center justify-center">
         <RouterProvider router={router} />
       </div>
     </main>
