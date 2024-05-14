@@ -19,7 +19,10 @@ const StyledButton = styled.button`
     border-radius: 10px;
     margin-top: 40px;
 `
-
+// TODO validation errors for password and username
+// TODO check endpoint and see if it exists
+// TODO write tests
+// TODO maybe instead of endpoint validation, we could disable button when criteria is not met?
 export const CreateAccount = () => {
     return (
         <Container>
