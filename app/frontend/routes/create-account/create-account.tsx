@@ -24,11 +24,12 @@ const StyledButton = styled.button`
     color: white;
     padding: 10px 0;
     border-radius: 10px;
-    margin-top: 40px;
+    margin-top: 30px;
 `;
 
 const ErrorText= styled.li`
     color: red;
+    font-size: 15px
 `;
 
 
@@ -54,15 +55,15 @@ export const CreateAccount = () => {
                         'X-CSRF-Token': csrfToken
                     },
                     body: JSON.stringify({
-                        username: username,
-                        password: password
+                        username: username.trim(),
+                        password: password.trim()
                     })
                 });
 
                 const responseData = await response.json();
 
                 if (!response.ok) {
-                    // If response is not successful, throw an error
+                    // If response is not successful, show an error
                     setErrors(responseData.errors || ['Failed to create account']);
                     return;
                 }
