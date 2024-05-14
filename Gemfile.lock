@@ -209,6 +209,7 @@ GEM
       nokogiri (~> 1.8)
     zeitwerk (2.6.11)
     zxcvbn (0.1.9)
+    zxcvbn-ruby (1.2.0)
 
 PLATFORMS
   arm64-darwin-22
@@ -231,6 +232,7 @@ DEPENDENCIES
   vite_rails (= 3.0.15)
   web-console (= 4.2.1)
   zxcvbn (= 0.1.9)
+  zxcvbn-ruby
 
 RUBY VERSION
    ruby 3.1.4p223

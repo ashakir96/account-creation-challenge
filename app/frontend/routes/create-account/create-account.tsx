@@ -2,19 +2,21 @@ import {Card} from "../../reusable-components/card/card.tsx";
 import {Input} from "../../reusable-components/input/input.tsx";
 import React from "react";
 import styled from "styled-components";
-import {Link} from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+
 
 const Container = styled.div`
     display: flex;
     width: 50%;
     justify-self: center;
     align-self: center;
-`
+`;
+
 const CardHeader = styled.div`
     display: flex;
     flex-direction: column;
     gap: 15px
-`
+`;
 
 const StyledButton = styled.button`
     width: 100%;
@@ -23,14 +25,20 @@ const StyledButton = styled.button`
     padding: 10px 0;
     border-radius: 10px;
     margin-top: 40px;
-`
-// TODO validation errors for password and username
-// TODO check endpoint and see if it exists
+`;
+
+const ErrorText= styled.li`
+    color: red;
+`;
+
+
 // TODO write tests
-// TODO maybe instead of endpoint validation, we could disable button when criteria is not met?
+
 export const CreateAccount = () => {
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
+    const [errors, setErrors] = React.useState<string[]>([]);
+    const navigate = useNavigate();
 
     const csrfTokenMeta = document.querySelector('meta[name="csrf-token"]');
 
@@ -53,11 +61,22 @@ export const CreateAccount = () => {
 
                 const responseData = await response.json();
 
-                console.log(responseData); // Handle successful response
-                // Redirect or show success message to the user
+                if (!response.ok) {
+                    // If response is not successful, throw an error
+                    setErrors(responseData.errors || ['Failed to create account']);
+                    return;
+                }
+
+                // Clear any previous errors and state if request was successful
+                setErrors([]);
+                setUsername('');
+                setPassword('');
+                // redirect to selection page
+                navigate("/signup/account-selection")
             } catch (error) {
-                console.error('Error:', error); // Log error message
+                console.error('Error:', error); // Log error
                 // Show error message to the user
+                setErrors(['An unexpected error occurred']);
             }
         }
     };
@@ -68,11 +87,18 @@ export const CreateAccount = () => {
                 <CardHeader>
                     <Input label="Username" onChange={setUsername}/>
                     <Input label="Password" onChange={setPassword}/>
+                    {errors.length > 0 && (
+                        <div>
+                            <ul>
+                                {errors.map((error, index) => (
+                                    <ErrorText key={index}>{error}</ErrorText>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
                 </CardHeader>
                 <StyledButton onClick={handleClick}>
-                    <Link to="/signup/account-selection">
                         Create Account
-                    </Link>
                 </StyledButton>
             </Card>
         </Container>
