@@ -18,6 +18,7 @@ export function Input({ onChange, label }: Props) {
       <label className="block text-sm">{label}</label>
       <input
         id={id}
+        data-testid={id}
         className="block w-full p-2 border-b-2 border-solid border-slate-300 focus:outline-none"
         value={value}
         onChange={handleChange}

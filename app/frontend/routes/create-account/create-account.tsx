@@ -38,41 +38,39 @@ export const CreateAccount = () => {
     const csrfTokenMeta = document.querySelector('meta[name="csrf-token"]');
 
     const handleClick = async () => {
-        if (csrfTokenMeta) {
-            const csrfToken = csrfTokenMeta.getAttribute('content') ?? "";
+        const csrfToken = csrfTokenMeta?.getAttribute('content') ?? "";
 
-            try {
-                const response = await fetch('/api/create-account', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-Token': csrfToken
-                    },
-                    body: JSON.stringify({
-                        username: username.trim(),
-                        password: password.trim()
-                    })
-                });
+        try {
+            const response = await fetch('/api/create-account', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-Token': csrfToken
+                },
+                body: JSON.stringify({
+                    username: username.trim(),
+                    password: password.trim()
+                })
+            });
 
-                const responseData = await response.json();
+            const responseData = await response.json();
 
-                if (!response.ok) {
-                    // If response is not successful, show an error
-                    setErrors(responseData.errors || ['Failed to create account']);
-                    return;
-                }
-
-                // Clear any previous errors and state if request was successful
-                setErrors([]);
-                setUsername('');
-                setPassword('');
-                // redirect to selection page
-                navigate("/signup/account-selection")
-            } catch (error) {
-                console.error('Error:', error); // Log error
-                // Show error message to the user
-                setErrors(['An unexpected error occurred']);
+            if (!response.ok) {
+                // If response is not successful, show an error
+                setErrors(responseData.errors || ['Failed to create account']);
+                return;
             }
+
+            // Clear any previous errors and state if request was successful
+            setErrors([]);
+            setUsername('');
+            setPassword('');
+            // redirect to selection page
+            navigate("/signup/account-selection")
+        } catch (error) {
+            console.error('Error:', error); // Log error
+            // Show error message to the user
+            setErrors(['An unexpected error occurred']);
         }
     };
 
