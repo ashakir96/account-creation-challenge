@@ -1,5 +1,5 @@
 import React from 'react';
-import {act, fireEvent, render, screen} from "@testing-library/react";
+import {act, fireEvent, render, screen, waitFor} from "@testing-library/react";
 import {CreateAccount} from "./create-account.tsx";
 import {BrowserRouter} from "react-router-dom";
 
@@ -62,5 +62,26 @@ describe("CreateAccount", () => {
 
         const usernameLengthErrorMessage = await screen.findByText("Username is too short (minimum is 10 characters)");
         expect(usernameLengthErrorMessage).toBeTruthy();
+    });
+
+    test("completes a successful response", async () => {
+        render(<CreateAccount />, { wrapper: BrowserRouter });
+
+        // Mock the fetch function
+        // checking to see if a successful request redirects the user
+        global.fetch = jest.fn().mockResolvedValueOnce({
+            ok: true,
+            json: async () => ({}),
+        });
+
+        // Click the create account button
+        act(() => {
+            fireEvent.click(screen.getByText('Create Account'));
+        });
+
+        await waitFor(() => {
+            // Assert that the navigation occurred
+            expect(global.location.pathname).toBe('/signup/account-selection');
+        });
     });
 })
