@@ -12,14 +12,30 @@ const Container = styled.div`
     max-width: 1000px;
 `
 
+const Header = styled.div`
+  width: 100%;
+  text-align: right;
+  margin-bottom: 20px;
+`;
+
+const Logout = styled(Link)`
+    padding: 4px 12px;
+    border-radius: 3px;
+    &:hover {
+        background: rgb(250, 245, 255);
+        color: hsla(244,49%,49%,1);
+        border: 1px solid hsla(244,49%,49%,1);
+    }
+`
+
 export function FlowLayout({ children }: Props) {
   return (
     <Container>
-      <div className="w-full text-right mb-5">
-        <Link to="/" reloadDocument>
+      <Header>
+        <Logout to="/" reloadDocument>
           Logout
-        </Link>
-      </div>
+        </Logout>
+      </Header>
       {children}
     </Container>
   );

@@ -7,6 +7,7 @@ import { Deposit } from './routes/signup/deposit/deposit.tsx';
 import { JointAccess } from './routes/signup/joint-access/joint-access.tsx';
 import { StockRestrictions } from './routes/signup/stock-restrictions/stock-restrictions.tsx';
 import {CreateAccount} from "./routes/create-account/create-account.tsx";
+import styled from "styled-components";
 
 const router = createBrowserRouter([
   {
@@ -39,12 +40,27 @@ const router = createBrowserRouter([
   },
 ]);
 
+const FullScreenContainer = styled.main`
+  height: 100vh;
+  width: 100vw;
+`;
+
+const Body = styled.div`
+  height: 100%;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 export function Router() {
   return (
-    <main className="h-screen w-screen">
-      <div className="h-full w-full max-w-[1200px] my-0 mx-auto flex items-center justify-center">
+    <FullScreenContainer>
+      <Body>
         <RouterProvider router={router} />
-      </div>
-    </main>
+      </Body>
+    </FullScreenContainer>
   );
 }
