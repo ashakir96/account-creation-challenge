@@ -1,28 +1,56 @@
 import React, { ChangeEvent, useState } from 'react';
+import {Container, InputContainer, Label, StyledButton, StyledInput} from "./components.tsx";
 
 interface Props {
   label: string;
   onChange?: (value: string) => void;
+  isPassword?: boolean;
 }
 
-export function Input({ onChange, label }: Props) {
-  const [value, setValue] = useState('');
-  const id = label.replace(/ /gm, '_');
+export function Input({ onChange, label, isPassword }: Props) {
+    const [value, setValue] = useState('');
+    const [showPassword, setShowPassword] = React.useState(false);
 
-  function handleChange(event: ChangeEvent<HTMLInputElement>) {
-    setValue(event.target.value);
-    onChange?.(event.target.value);
-  }
-  return (
-    <div className="space-y-1">
-      <label className="block text-sm">{label}</label>
-      <input
-        id={id}
-        data-testid={id}
-        className="block w-full p-2 border-b-2 border-solid border-slate-300 focus:outline-none"
-        value={value}
-        onChange={handleChange}
-      />
-    </div>
-  );
+    const id = label.replace(/ /gm, '_');
+
+    function handleChange(event: ChangeEvent<HTMLInputElement>) {
+        setValue(event.target.value);
+        onChange?.(event.target.value);
+    }
+
+    if (isPassword) {
+        return (
+            <Container>
+                <Label>{label}</Label>
+                <InputContainer>
+                    <StyledInput
+                        type={showPassword ? 'text' : 'password'}
+                        id={id}
+                        data-testid={id}
+                        value={value}
+                        onChange={handleChange}
+                    />
+                    <StyledButton
+                        onClick={() => setShowPassword(!showPassword)}
+                    >
+                        {showPassword ? 'Hide' : 'Show'}
+                    </StyledButton>
+                </InputContainer>
+            </Container>
+        )
+    }
+
+    return (
+        <Container>
+            <Label>{label}</Label>
+            <InputContainer>
+                <StyledInput
+                    id={id}
+                    data-testid={id}
+                    value={value}
+                    onChange={handleChange}
+                />
+            </InputContainer>
+        </Container>
+    );
 }

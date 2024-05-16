@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import {FlowLayout} from "../../reusable-components/flow-layout/flow-layout.tsx";
 import {Button} from "../../reusable-components/button/button.tsx";
 
-
 const Container = styled.div`
     display: flex;
     width: 50%;
@@ -25,9 +24,6 @@ const ErrorText= styled.li`
     color: red;
     font-size: 15px
 `;
-
-
-// TODO write tests
 
 export const CreateAccount = () => {
     const [username, setUsername] = React.useState('');
@@ -80,7 +76,7 @@ export const CreateAccount = () => {
                 <Card title="Create New Account">
                     <CardHeader>
                         <Input label="Username" onChange={setUsername}/>
-                        <Input label="Password" onChange={setPassword}/>
+                        <Input label="Password" onChange={setPassword} isPassword={true}/>
                         {errors.length > 0 && (
                             <div>
                                 <ul>

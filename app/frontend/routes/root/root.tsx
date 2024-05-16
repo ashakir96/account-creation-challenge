@@ -14,6 +14,7 @@ const Body = styled.div`
     flex-direction: column;
     gap: 40px;
     margin-top: 15px;
+    align-items: center;
 `
 
 export function Root() {
