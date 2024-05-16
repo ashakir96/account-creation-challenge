@@ -20,7 +20,7 @@ const Header = styled.div`
 
 const Logout = styled(Link)`
     padding: 4px 12px;
-    border-radius: 3px;
+    border-radius: 4px;
     &:hover {
         background: rgb(250, 245, 255);
         color: hsla(244,49%,49%,1);
