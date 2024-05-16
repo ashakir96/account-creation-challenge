@@ -9,8 +9,7 @@ interface Props {
 }
 
 const Section = styled.section`
-    padding: 40px;
-    min-height: 400px;
+    padding: 40px 20px;
     width: 100%;
     border-radius: 16px;
     border: 1px solid rgb(226 232 240);
@@ -22,6 +21,7 @@ const Header = styled.h1`
     margin: 20px 0;
     font-size: 30px;
     line-height: 36px;
+    font-weight: bolder;
     align-self: center;
     color: black;
 `

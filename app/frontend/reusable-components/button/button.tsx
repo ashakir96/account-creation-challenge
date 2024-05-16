@@ -27,11 +27,11 @@ const StyledButton = styled.button`
 export function Button({ href, children, type, onClick }: Props) {
   if (href) {
     return (
-        <StyledButton>
-          <Link to={href}>
-            {children}
-          </Link>
-        </StyledButton>
+        <Link to={href}>
+            <StyledButton>
+                {children}
+            </StyledButton>
+        </Link>
     );
   }
 

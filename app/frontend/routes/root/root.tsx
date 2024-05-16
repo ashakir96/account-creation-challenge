@@ -7,14 +7,16 @@ const Container = styled.div`
     display: flex;
     justify-self: center;
     align-self: center;
+    width: 50vw;
 `;
 
 const Body = styled.div`
     display: flex;
-    flex-direction: column;
     gap: 40px;
     margin-top: 15px;
     align-items: center;
+    width: 100%;
+    justify-content: space-evenly;
 `
 
 export function Root() {

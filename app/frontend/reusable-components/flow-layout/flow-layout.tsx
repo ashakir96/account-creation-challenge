@@ -10,6 +10,7 @@ const Container = styled.div`
     height: 100%;
     margin: 20px auto 0 auto;
     max-width: 1000px;
+    width: 50vw;
 `
 
 const Header = styled.div`
